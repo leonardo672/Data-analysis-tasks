@@ -132,6 +132,29 @@ def is_isomorphic(s: str, t: str) -> bool:
     return True
 ```
 
+----------
+
+### Задание №2: Натуральная последовательность
+Реализовать функцию (или тело функции), которая находит единственное отсутствующее число из последовательности натуральных чисел `1,2,…,n.`
+Пример:
+```
+nums = [1, 2, 3, 4, 5, 6, 8, 9, 10, 11]
+print(missing_number(nums))
+```
+Вывод: 7
+Оценить оптимальность решения по времени и памяти и прикрепить текст кода.
+
+### решения: 
+```
+def missing_number(nums):
+    n = len(nums) + 1      # since one number is missing
+    expected_sum = n * (n + 1) // 2
+    actual_sum = sum(nums)
+    return expected_sum - actual_sum
+```
+
+
+
 
 
 
