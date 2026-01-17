@@ -232,6 +232,48 @@ FROM examination;
 Ответ:
 *минимально 30, максимально 50*
 
-
 -------
 
+### Задание №3: Покупки
+```
+create table account
+(
+    id integer, -- ID счета
+    client_id integer, -- ID клиента
+    open_dt date, -- дата открытия счета
+    close_dt date -- дата закрытия счета
+)
+
+create table transaction
+(
+    id integer,  -- ID транзакции
+    account_id integer,  -- ID счета
+    transaction_date date,  -- дата транзакции
+    amount numeric(10,2), -- сумма транзакции
+    type varchar(3) -- тип транзакции
+)
+```
+Вывести `ID` клиентов, которые за последний месяц по всем своим счетам совершили покупок меньше, чем на `5000` рублей.
+Без использования подзапросов и оконных функций.
+
+### решения: 
+```
+SELECT 
+    a.client_id
+FROM 
+    account a
+JOIN 
+    transaction t
+    ON a.id = t.account_id
+WHERE 
+    t.type = 'buy'
+    AND t.transaction_date >= CURRENT_DATE - INTERVAL '1 month'
+GROUP BY 
+    a.client_id
+HAVING 
+    SUM(t.amount) < 5000;
+```
+
+----------------
+
+## Блок 4: Статистика и АБ-тесты 
